@@ -30,4 +30,5 @@ jobs:
         make init
     - name: Test with pytest
       run: |
+        cd lesson-06
         make test
