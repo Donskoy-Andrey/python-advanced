@@ -1,5 +1,6 @@
 import abc
 import asyncio
+import concurrent.futures
 
 
 class AbstractModel:
@@ -20,4 +21,5 @@ class Handler:
         # отличается от времени исполнения нескольких таких корутин, запущенных конкурентно.
 
         loop = asyncio.get_running_loop()
-        await loop.run_in_executor(None, self._model.compute)
+        executor = concurrent.futures.ThreadPoolExecutor()
+        await loop.run_in_executor(executor, self._model.compute)
